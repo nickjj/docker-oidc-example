@@ -159,9 +159,10 @@ on:
 After everything is wired up you should be able to run:
 
 ```sh
-# This steps is only needed if you're pushing code before your tag.
+# This step is only needed if you're pushing code before your tag.
 git push origin main
 
+# Create and push the tag, make sure it starts with "v" to match our pattern.
 git tag v0.0.1
 git push origin v0.0.1
 ```
