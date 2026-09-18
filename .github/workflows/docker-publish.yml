@@ -2,6 +2,8 @@ name: "Docker publish"
 
 on:
   push:
+    # This aligns with our strategy of having this run when a git tag is pushed,
+    # it matches the pattern we used in the Connection ID subject claim of "v*".
     tags:
       - "v*"
 

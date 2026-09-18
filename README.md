@@ -143,6 +143,17 @@ Docker Hub repository and what it can do there.
       id-token: "write"
 ```
 
+**The last takeaway is how the action is run in case you want to change it:**
+
+```yml
+on:
+  push:
+    # This aligns with our strategy of having this run when a git tag is pushed,
+    # it matches the pattern we used in the Connection ID subject claim of "v*".
+    tags:
+      - "v*"
+```
+
 ## Push a Git Tag to Test
 
 After everything is wired up you should be able to run:
