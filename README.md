@@ -145,7 +145,7 @@ Docker Hub repository and what it can do there.
 
 ## Push a Git Tag to Test
 
-After everything is wired up should be able to run:
+After everything is wired up you should be able to run:
 
 ```sh
 # This steps is only needed if you're pushing code before your tag.
