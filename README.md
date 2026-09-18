@@ -18,8 +18,10 @@ If you want to replicate this demo on your end, you'll need:
 ## Details
 
 We'll wire up the OIDC connection and GitHub Actions so that when you push a
-new tag to a repo on GitHub, a new Docker image will get built and pushed.
-Think of this as creating a tagged release.
+new tag to a repo on GitHub, a new
+[multi-architecture](https://nickjanetakis.com/blog/build-git-tagged-multi-arch-docker-images-with-github-actions)
+Docker image will get built and pushed. Think of this as creating a tagged
+release.
 
 Given this demo only exercises using OIDC connections, the image we'll be using
 to build and push is very basic. It's a custom version of Docker's hello-world
