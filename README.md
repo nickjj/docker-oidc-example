@@ -159,6 +159,7 @@ At this point:
 
 - The `docker-publish.yml` GitHub Action should kick in and run successfully
 - The Docker image should be pushed to your Docker Hub organization
+    - If this didn't work you can view the "Failures" tab within the Connection ID on the Docker Hub to see why it failed if it got to the point where it reached the connection
 
 You can test it locally:
 
