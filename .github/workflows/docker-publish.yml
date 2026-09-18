@@ -1,0 +1,56 @@
+name: "Docker publish"
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-and-push-image:
+    runs-on: "ubuntu-24.04"
+
+    permissions:
+      # This is for GitHub's checkout action, normally it's set to read but
+      # since we define a custom `permissions`, we'll need to set it here.
+      contents: "read"
+      # Allow this job to request a GitHub OIDC token, this write is not
+      # associated with write access to your Docker Hub repo.
+      id-token: "write"
+
+    steps:
+      - name: "Checkout"
+        uses: "actions/checkout@v7"
+
+      - name: "Set up QEMU"
+        uses: "docker/setup-qemu-action@v4"
+
+      - name: "Set up Docker Buildx"
+        uses: "docker/setup-buildx-action@v4"
+
+      # Configure both variables in your GitHub repo, they are not secrets.
+      # https://github.com/GITHUB_USERNAME/GITHUB_REPO/settings/variables/actions
+      #
+      # DOCKERHUB_OIDC_CONNECTIONID can be found in your Docker org settings:
+      # https://app.docker.com/accounts/YOUR_ORG/admin/oidc-connections
+      #
+      # DOCKERHUB_ORGANIZATION_USERNAME is your Docker Hub org account name:
+      # https://hub.docker.com/repository/docker/YOUR_ORG
+      - name: "Docker login"
+        uses: "docker/login-action@v4"
+        env:
+          DOCKERHUB_OIDC_CONNECTIONID: "${{ vars.DOCKERHUB_OIDC_CONNECTIONID }}"
+        with:
+          username: "${{ vars.DOCKERHUB_ORGANIZATION_USERNAME }}"
+
+      - name: "Build and push image tags"
+        uses: "docker/build-push-action@v7"
+        with:
+          context: "."
+          platforms: "linux/amd64,linux/arm64"
+          sbom: true
+          push: true
+          # DOCKERHUB_REPO_NAME is your Docker Hub org's repo name.
+          # https://hub.docker.com/repository/docker/YOUR_ORG/REPO_NAME
+          tags: |
+            "${{ vars.DOCKERHUB_ORGANIZATION_USERNAME }}/${{ vars.DOCKERHUB_REPO_NAME }}:latest"
+            "${{ vars.DOCKERHUB_ORGANIZATION_USERNAME }}/${{ vars.DOCKERHUB_REPO_NAME }}:${{ github.ref_name }}"
