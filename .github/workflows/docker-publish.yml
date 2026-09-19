@@ -33,10 +33,10 @@ jobs:
       # https://github.com/GITHUB_USERNAME/GITHUB_REPO/settings/variables/actions
       #
       # DOCKERHUB_OIDC_CONNECTIONID can be found in your Docker org settings:
-      # https://app.docker.com/accounts/YOUR_ORG/admin/oidc-connections
+      # https://app.docker.com/accounts/DOCKERHUB_ORGANIZATION_USERNAME/admin/oidc-connections
       #
       # DOCKERHUB_ORGANIZATION_USERNAME is your Docker Hub org account name:
-      # https://hub.docker.com/repository/docker/YOUR_ORG
+      # https://hub.docker.com/repository/docker/DOCKERHUB_ORGANIZATION_USERNAME
       - name: "Docker login"
         uses: "docker/login-action@v4"
         env:
@@ -52,7 +52,7 @@ jobs:
           sbom: true
           push: true
           # DOCKERHUB_REPO_NAME is your Docker Hub org's repo name.
-          # https://hub.docker.com/repository/docker/YOUR_ORG/REPO_NAME
+          # https://hub.docker.com/repository/docker/DOCKERHUB_ORGANIZATION_USERNAME/DOCKERHUB_REPO_NAME
           tags: |
             "${{ vars.DOCKERHUB_ORGANIZATION_USERNAME }}/${{ vars.DOCKERHUB_REPO_NAME }}:latest"
             "${{ vars.DOCKERHUB_ORGANIZATION_USERNAME }}/${{ vars.DOCKERHUB_REPO_NAME }}:${{ github.ref_name }}"
