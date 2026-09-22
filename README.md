@@ -6,6 +6,12 @@ images without you needing to manage access tokens.
 
 This will work for both public and private GitHub / Docker repos.
 
+## Demo Video
+
+If you prefer video, here's a walkthrough of everything covered below:
+
+[![Demo Video](https://img.youtube.com/vi/thGrycMGcXc/0.jpg)](https://www.youtube.com/watch?v=thGrycMGcXc)
+
 ## Requirements
 
 If you want to replicate this demo on your end, you'll need:
